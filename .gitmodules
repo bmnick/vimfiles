@@ -51,4 +51,4 @@
 	url = https://github.com/tpope/vim-surround.git
 [submodule "bundle/vim-ir_black"]
 	path = bundle/vim-ir_black
-	url = git@github.com:bmnick/vim-ir_black.git
+	url = https://github.com/bmnick/vim-ir_black.git
