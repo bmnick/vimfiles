@@ -31,6 +31,7 @@ set hlsearch
 
 if has("gui_macvim")
 	set guifont=Menlo:h14
+	set guioptions-=T
 end
 
 " Do some stuff to make tabs a little nicer
@@ -48,10 +49,6 @@ if has("autocmd")
 	autocmd FocusGained * setlocal cursorline
 	autocmd FocusLost * setlocal nocursorline
 	autocmd FocusLost * setlocal nohls
-
-else
-
-  set autoindent		" always set autoindenting on
 
 endif " has("autocmd")
 
