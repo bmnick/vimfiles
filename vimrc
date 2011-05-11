@@ -50,6 +50,8 @@ if has("autocmd")
 	autocmd FocusLost * setlocal nocursorline
 	autocmd FocusLost * setlocal nohls
 
+	autocmd BufNewFile,BufRead *.rb compiler rakespec
+
 endif " has("autocmd")
 
 colorscheme ir_black
