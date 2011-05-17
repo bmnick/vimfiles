@@ -51,6 +51,7 @@ if has("autocmd")
 	autocmd FocusLost * setlocal nohls
 
 	autocmd BufNewFile,BufRead *.rb compiler rakespec
+	autocmd BufNewFile,BufRead *.handlebars set filetype=mustache
 
 endif " has("autocmd")
 
