@@ -85,3 +85,6 @@
 [submodule "bundle/markdown"]
 	path = bundle/markdown
 	url = https://github.com/tpope/vim-markdown.git
+[submodule "bundle/rspec"]
+	path = bundle/rspec
+	url = https://github.com/taq/vim-rspec.git
