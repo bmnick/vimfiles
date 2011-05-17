@@ -55,3 +55,6 @@
 [submodule "bundle/mustache"]
 	path = bundle/mustache
 	url = git://github.com/juvenn/mustache.vim.git
+[submodule "bundle/molokai"]
+	path = bundle/molokai
+	url = https://github.com/vim-scripts/molokai.git

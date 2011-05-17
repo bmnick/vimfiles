@@ -55,7 +55,8 @@ if has("autocmd")
 
 endif " has("autocmd")
 
-colorscheme ir_black
+let molokai_original=1
+colorscheme molokai
 
 " Rails extras
 command -bar -nargs=1 OpenURL :!open <args>
