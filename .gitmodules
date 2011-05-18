@@ -88,3 +88,6 @@
 [submodule "bundle/rspec"]
 	path = bundle/rspec
 	url = https://github.com/taq/vim-rspec.git
+[submodule "bundle/prolog"]
+	path = bundle/prolog
+	url = https://github.com/adimit/prolog.vim.git
