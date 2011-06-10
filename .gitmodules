@@ -91,15 +91,9 @@
 [submodule "bundle/prolog"]
 	path = bundle/prolog
 	url = https://github.com/adimit/prolog.vim.git
-[submodule "bundle/github_vim_theme"]
-	path = bundle/github_vim_theme
-	url = git://github.com/nono/github_vim_theme.git
 [submodule "bundle/vim_mac_classic"]
 	path = bundle/vim_mac_classic
 	url = git://github.com/nelstrom/vim-mac-classic-theme.git
 [submodule "bundle/vim_pyte"]
 	path = bundle/vim_pyte
 	url = git://github.com/therubymug/vim-pyte.git
-[submodule "bundle/vim-neutron/colors"]
-	path = bundle/vim-neutron/colors
-	url = git://github.com/josephwecker/neutron.vim.git

@@ -40,6 +40,9 @@ noremap <silent> <c-s-Tab> :tabp<CR>
 inoremap <silent> <c-Tab> <Esc>:tabn<CR>
 inoremap <silent> <c-s-Tab> <Esc>:tabp<CR>
 
+" Fuzzy Finder integration
+noremap <silent> <c-o> :FufCoverageFile<CR>
+
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
@@ -55,8 +58,13 @@ if has("autocmd")
 
 endif " has("autocmd")
 
-let molokai_original=1
-colorscheme molokai
+colorscheme pyte
+
+" let molokai_original=1
+" colorscheme molokai
+
+" set bg=dark
+" colorscheme solarized
 
 " Rails extras
 command -bar -nargs=1 OpenURL :!open <args>
