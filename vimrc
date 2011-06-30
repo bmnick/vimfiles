@@ -58,13 +58,13 @@ if has("autocmd")
 
 endif " has("autocmd")
 
-colorscheme pyte
+" colorscheme pyte
 
 " let molokai_original=1
 " colorscheme molokai
 
-" set bg=dark
-" colorscheme solarized
+set bg=dark
+colorscheme solarized
 
 " Rails extras
 command -bar -nargs=1 OpenURL :!open <args>
