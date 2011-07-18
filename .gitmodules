@@ -97,3 +97,6 @@
 [submodule "bundle/vim_pyte"]
 	path = bundle/vim_pyte
 	url = git://github.com/therubymug/vim-pyte.git
+[submodule "bundle/vim-scratch"]
+	path = bundle/vim-scratch
+	url = git://github.com/duff/vim-scratch.git
