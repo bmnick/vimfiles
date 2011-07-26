@@ -30,7 +30,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 set hlsearch
 
 if has("gui_macvim")
-	set guifont=Menlo:h14
+	set guifont=Monaco:h14
 	set guioptions-=T
 end
 
@@ -42,6 +42,9 @@ inoremap <silent> <c-s-Tab> <Esc>:tabp<CR>
 
 " Fuzzy Finder integration
 noremap <silent> <c-o> :FufCoverageFile<CR>
+
+" NERDCommenter usefulness
+noremap <silent> <D-/> \ci
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -63,8 +66,10 @@ endif " has("autocmd")
 " let molokai_original=1
 " colorscheme molokai
 
-set bg=dark
-colorscheme solarized
+" set bg=dark
+" colorscheme solarized
+
+colorscheme wombat256mod
 
 " Rails extras
 command -bar -nargs=1 OpenURL :!open <args>
