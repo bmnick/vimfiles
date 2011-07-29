@@ -1,12 +1,13 @@
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-syntax on
-filetype plugin indent on
 
 " Pathogen for bundled plugins
 call pathogen#runtime_append_all_bundles() 
 call pathogen#helptags()
+
+syntax on
+filetype plugin indent on
 
 " Nifty vim command options
 set nrformats="alpha,hex"   " Change letters and hex with ^a and ^x
