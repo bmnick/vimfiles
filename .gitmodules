@@ -103,3 +103,6 @@
 [submodule "bundle/wombat256.vim"]
 	path = bundle/wombat256.vim
 	url = git://github.com/vim-scripts/wombat256.vim.git
+[submodule "bundle/vim-scala-support"]
+	path = bundle/vim-scala-support
+	url = git://github.com/rosstimson/scala-vim-support.git
