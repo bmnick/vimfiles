@@ -106,3 +106,6 @@
 [submodule "bundle/vim-scala-support"]
 	path = bundle/vim-scala-support
 	url = git://github.com/rosstimson/scala-vim-support.git
+[submodule "bundle/vim-vividchalk"]
+	path = bundle/vim-vividchalk
+	url = git://github.com/tpope/vim-vividchalk.git
