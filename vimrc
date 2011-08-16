@@ -35,7 +35,7 @@ if has("gui_macvim")
 	set guioptions-=T
 
 	autocmd FocusGained * set transparency=3
-	autocmd FocusLost * set transparency=50
+	"autocmd FocusLost * set transparency=50
 end
 
 " Do some stuff to make tabs a little nicer
@@ -73,7 +73,9 @@ endif " has("autocmd")
 " set bg=dark
 " colorscheme solarized
 
-colorscheme wombat256mod
+" colorscheme wombat256mod
+
+colorscheme vividchalk
 
 " Rails extras
 command -bar -nargs=1 OpenURL :!open <args>
