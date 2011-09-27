@@ -86,7 +86,9 @@ endif " has("autocmd")
 
 " colorscheme wombat256mod
 
-colorscheme vividchalk
+" colorscheme vividchalk
+
+colorscheme railscasts
 
 " Rails extras
 command -bar -nargs=1 OpenURL :!open <args>
