@@ -55,6 +55,12 @@ noremap <silent> <c-s-Tab> :tabp<CR>
 inoremap <silent> <c-Tab> <Esc>:tabn<CR>
 inoremap <silent> <c-s-Tab> <Esc>:tabp<CR>
 
+" Make window navigation somewhat quicker
+noremap <silent> <c-j> <c-w>j
+noremap <silent> <c-k> <c-w>k
+noremap <silent> <c-h> <c-w>h
+noremap <silent> <c-l> <c-w>l
+
 " Fuzzy Finder integration
 noremap <silent> <c-o> :FufCoverageFile<CR>
 
@@ -73,6 +79,8 @@ if has("autocmd")
 
 	autocmd BufNewFile,BufRead *.rb compiler rakespec
 	autocmd BufNewFile,BufRead *.handlebars set filetype=mustache
+
+	autocmd BufNewFile, BufRead *.py set ts=4 sw=4 expandtab
 
 endif " has("autocmd")
 
