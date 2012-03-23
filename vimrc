@@ -44,9 +44,6 @@ set hlsearch
 if has("gui_macvim")
 	set guifont=Monaco:h14
 	set guioptions-=T
-
-	autocmd FocusGained * set transparency=3
-	autocmd FocusLost * set transparency=50
 end
 
 " Do some stuff to make tabs a little nicer
