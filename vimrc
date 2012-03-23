@@ -89,11 +89,11 @@ endif " has("autocmd")
 " set bg=dark
 " colorscheme solarized
 
-" colorscheme wombat256mod
+colorscheme wombat256mod
 
 " colorscheme vividchalk
 
-colorscheme railscasts
+" colorscheme railscasts
 
 " Rails extras
 command -bar -nargs=1 OpenURL :!open <args>

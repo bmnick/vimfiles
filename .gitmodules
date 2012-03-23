@@ -115,6 +115,16 @@
 [submodule "bundle/vim-rake"]
 	path = bundle/vim-rake
 	url = git://github.com/tpope/vim-rake.git
+[submodule "bundle/vim-addon-ocaml"]
+	path = bundle/vim-addon-ocaml
+	url = https://github.com/MarcWeber/vim-addon-ocaml.git
+[submodule "bundle/omlet.vim"]
+	path = bundle/omlet.vim
+	url = git://github.com/vim-scripts/omlet.vim.git
+[submodule "bundle/vim-clojure"]
+	path = bundle/vim-clojure
+	url = git://github.com/vim-scripts/VimClojure.git
 [submodule "bundle/vim-json"]
 	path = bundle/vim-json
 	url = https://github.com/leshill/vim-json.git
+
