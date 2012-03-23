@@ -44,9 +44,6 @@ set hlsearch
 if has("gui_macvim")
 	set guifont=Monaco:h14
 	set guioptions-=T
-
-	autocmd FocusGained * set transparency=3
-	autocmd FocusLost * set transparency=50
 end
 
 " Do some stuff to make tabs a little nicer
@@ -63,6 +60,7 @@ noremap <silent> <c-l> <c-w>l
 
 " Fuzzy Finder integration
 noremap <silent> <c-o> :FufCoverageFile<CR>
+noremap <silent> <c-b> :FufBuffer<CR>
 
 " NERDCommenter usefulness
 noremap <silent> <D-/> \ci
@@ -103,6 +101,7 @@ command -bar -nargs=1 OpenURL :!open <args>
 
 " Shorter subsittute
 nnoremap <leader>s :%s//g<left><Left>
+nnoremap <leader>c :Gstatus<CR>
 
 noremap <Leader>p :NERDTreeToggle<CR>
 
@@ -124,6 +123,8 @@ function! ShowRoutes()
   :normal dd
 endfunction
 map <leader>gR :call ShowRoutes()<cr>
+
+nnoremap <c-;> mQA;<Esc>`Q
 
 " autoset compilers/makeprgs for test and spec files
 autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
