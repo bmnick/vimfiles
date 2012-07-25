@@ -17,6 +17,16 @@ set tildeop									" turn tildeop on for tilde as an operator
 set number					" Enable line numbering
 set numberwidth=6 	" Make line numbering wide like TextMate
 
+" Toggle between relative numbering and absolute numbering
+function! NumberToggle()
+	if(&relativenumber == 1)
+		set number
+	else
+		set relativenumber
+	endif
+endfunction
+nnoremap <leader>r :call NumberToggle()<CR>
+
 " Make sure we're saving for most actions
 set autowrite
 
@@ -26,25 +36,28 @@ set shiftwidth=2
 
 " Activate the statusline globally
 set laststatus=2
-" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L] 
 set statusline=   " clear the statusline for when vimrc is reloaded
-set statusline+=%-3.3n\                      " buffer number
-set statusline+=%f\                          " file name
+set statusline+=%-3.3n::\                      " buffer number
+set statusline+=%f\ ::\                          " file name
 set statusline+=%h%m%r%w                     " flags
 set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
 set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
 set statusline+=%{&fileformat}]              " file format
 set statusline+=%=                           " right align
 set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
-set statusline+=%b,0x%-8B\                   " current char
-set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
+set statusline+=::\ %b,0x%-8B\ ::\                   " current char
+set statusline+=%-14.(%l,%c%V%)\ ::\ %<%P        " offset
 
+set incsearch
 set hlsearch
+noremap <silent> <C-h> :nohls<CR>
 
 if has("gui_macvim")
 	set guifont=Monaco:h14
 	set guioptions-=T
 end
+
+set pastetoggle=<leader>v
 
 " Do some stuff to make tabs a little nicer
 noremap <silent> <c-Tab> :tabn<CR>
@@ -61,6 +74,14 @@ noremap <silent> <c-l> <c-w>l
 " Fuzzy Finder integration
 noremap <silent> <c-o> :FufCoverageFile<CR>
 noremap <silent> <c-b> :FufBuffer<CR>
+
+" Getting out of insert
+inoremap <silent> jj <Esc>
+inoremap <silent> kk <Esc>
+
+" Show some non-printing characters
+set listchars=eol:¶,tab:>-,trail:∙,extends:>,precedes:<
+noremap <silent> <leader>l :set invlist<CR>
 
 " NERDCommenter usefulness
 noremap <silent> <D-/> \ci
@@ -84,13 +105,13 @@ endif " has("autocmd")
 
 " colorscheme pyte
 
-" let molokai_original=1
-" colorscheme molokai
+let molokai_original=1
+colorscheme molokai
 
 " set bg=dark
 " colorscheme solarized
 
-colorscheme wombat256mod
+" colorscheme wombat256mod
 
 " colorscheme vividchalk
 
@@ -105,25 +126,7 @@ nnoremap <leader>c :Gstatus<CR>
 
 noremap <Leader>p :NERDTreeToggle<CR>
 
-" show routes in a window to top left
-function! ShowRoutes()
-  " Requires 'scratch' plugin
-  :topleft 100 :split __Routes__
-  " Make sure Vim doesn't write __Routes__ as a file
-  :set buftype=nofile
-  " Delete everything
-  :normal 1GdG
-  " Put routes output in buffer
-  :0r! rake -s routes
-  " Size window to number of lines (1 plus rake output length)
-  :exec ":normal " . line("$") . _ "
-  " Move cursor to bottom
-  :normal 1GG
-  " Delete empty trailing line
-  :normal dd
-endfunction
-map <leader>gR :call ShowRoutes()<cr>
-
+" Append a semicolon to the current line
 nnoremap <c-;> mQA;<Esc>`Q
 
 " autoset compilers/makeprgs for test and spec files
