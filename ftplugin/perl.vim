@@ -1,0 +1,3 @@
+" Perl ftplugin
+
+compiler perl
