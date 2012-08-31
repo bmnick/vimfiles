@@ -142,5 +142,8 @@ autocmd FileType ruby
 autocmd User Bundler
       \ if &makeprg !~ 'bundle' | setl makeprg^=bundle\ exec\  | endif
 
+" Align on equal signs
+
+vnoremap <leader>a :Align => = :<CR>
 " double tap leader for swap to last file
 nnoremap <leader><leader> <c-^>
