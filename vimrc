@@ -71,9 +71,8 @@ noremap <silent> <c-k> <c-w>k
 noremap <silent> <c-h> <c-w>h
 noremap <silent> <c-l> <c-w>l
 
-" Fuzzy Finder integration
-noremap <silent> <c-o> :FufCoverageFile<CR>
-noremap <silent> <c-b> :FufBuffer<CR>
+" CtrlP integration
+noremap <silent> <c-o> :CtrlP<CR>
 
 " Getting out of insert
 inoremap <silent> jj <Esc>
@@ -143,7 +142,8 @@ autocmd User Bundler
       \ if &makeprg !~ 'bundle' | setl makeprg^=bundle\ exec\  | endif
 
 " Align on equal signs
-
 vnoremap <leader>a :Align => = :<CR>
+
 " double tap leader for swap to last file
 nnoremap <leader><leader> <c-^>
+
