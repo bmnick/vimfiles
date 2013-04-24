@@ -109,11 +109,13 @@ endif " has("autocmd")
 
 " colorscheme pyte
 
-let molokai_original=1
-colorscheme molokai
+" let molokai_original=1
+" colorscheme molokai
 
 " set bg=dark
 " colorscheme solarized
+
+colorscheme detailed
 
 " colorscheme wombat256mod
 
