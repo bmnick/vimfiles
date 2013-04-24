@@ -48,6 +48,7 @@ set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
 set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
 set statusline+=%{&fileformat}]              " file format
 set statusline+=%=                           " right align
+set statusline+=%{fugitive#statusline()}\    " fugitive status
 set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
 set statusline+=::\ %b,0x%-8B\ ::\                   " current char
 set statusline+=%-14.(%l,%c%V%)\ ::\ %<%P        " offset
