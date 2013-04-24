@@ -143,3 +143,6 @@
 [submodule "bundle/vim-detailed"]
 	path = bundle/vim-detailed
 	url = https://github.com/rking/vim-detailed.git
+[submodule "bundle/vim-easymotion"]
+	path = bundle/vim-easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git
