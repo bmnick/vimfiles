@@ -38,6 +38,10 @@ set autowrite
 set tabstop=2
 set shiftwidth=2
 
+" Smarter case handling in searches
+set ignorecase
+set smartcase
+
 " Activate the statusline globally
 set laststatus=2
 set statusline=   " clear the statusline for when vimrc is reloaded
