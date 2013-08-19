@@ -24,7 +24,7 @@
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "bundle/vim-conque"]
 	path = bundle/vim-conque
-	url = https://github.com/rson/vim-conque.git
+	url = https://github.com/basepi/vim-conque.git
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
@@ -81,7 +81,7 @@
 	url = https://github.com/tpope/vim-markdown.git
 [submodule "bundle/rspec"]
 	path = bundle/rspec
-	url = https://github.com/taq/vim-rspec.git
+	url = https://github.com/thoughtbot/vim-rspec.git
 [submodule "bundle/prolog"]
 	path = bundle/prolog
 	url = https://github.com/adimit/prolog.vim.git
