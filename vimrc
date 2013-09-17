@@ -2,6 +2,9 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+let g:airline#extensions#tagbar#enabled = 0
+let g:airline_powerline_fonts = 1
+
 " Pathogen for bundled plugins
 call pathogen#runtime_append_all_bundles() 
 call pathogen#helptags()
@@ -41,6 +44,9 @@ set shiftwidth=2
 " Smarter case handling in searches
 set ignorecase
 set smartcase
+
+" Airline config!
+let g:airline_detect_modified=1
 
 " Activate the statusline globally
 set laststatus=2
