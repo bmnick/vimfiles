@@ -3,10 +3,11 @@
 set nocompatible
 
 let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 " Pathogen for bundled plugins
-call pathogen#runtime_append_all_bundles() 
+call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
 syntax on
@@ -92,31 +93,31 @@ nnoremap <silent> <Leader>f :bn<CR>
 set hidden
 
 function! BufSel(pattern)
-  let bufcount = bufnr("$")
-  let currbufnr = 1
-  let nummatches = 0
-  let firstmatchingbufnr = 0
-  while currbufnr <= bufcount
-    if(bufexists(currbufnr))
-      let currbufname = bufname(currbufnr)
-      if(match(currbufname, a:pattern) > -1)
-        echo currbufnr . ": ". bufname(currbufnr)
-        let nummatches += 1
-        let firstmatchingbufnr = currbufnr
-      endif
-    endif
-    let currbufnr = currbufnr + 1
-  endwhile
-  if(nummatches == 1)
-    execute ":buffer ". firstmatchingbufnr
-  elseif(nummatches > 1)
-    let desiredbufnr = input("Enter buffer number: ")
-    if(strlen(desiredbufnr) != 0)
-      execute ":buffer ". desiredbufnr
-    endif
-  else
-    echo "No matching buffers"
-  endif
+	let bufcount = bufnr("$")
+	let currbufnr = 1
+	let nummatches = 0
+	let firstmatchingbufnr = 0
+	while currbufnr <= bufcount
+	if(bufexists(currbufnr))
+		let currbufname = bufname(currbufnr)
+		if(match(currbufname, a:pattern) > -1)
+			echo currbufnr . ": ". bufname(currbufnr)
+			let nummatches += 1
+			let firstmatchingbufnr = currbufnr
+		endif
+	endif
+	let currbufnr = currbufnr + 1
+	endwhile
+	if(nummatches == 1)
+	execute ":buffer ". firstmatchingbufnr
+	elseif(nummatches > 1)
+	let desiredbufnr = input("Enter buffer number: ")
+	if(strlen(desiredbufnr) != 0)
+		execute ":buffer ". desiredbufnr
+	endif
+	else
+	echo "No matching buffers"
+	endif
 endfunction
 
 "Bind the BufSel() function to a user-command
@@ -150,6 +151,18 @@ if has("autocmd")
 	autocmd BufNewFile,BufRead *.handlebars set filetype=mustache
 
 	autocmd BufNewFile, BufRead *.py set ts=4 sw=4 expandtab
+	"
+" autoset compilers/makeprgs for test and spec files
+	autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
+	autocmd FileType ruby
+		\if expand('%') =~# '_test\.rb$' |
+		\	compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
+		\elseif expand('%') =~# '_spec\.rb$' |
+		\	compiler rspec | setl makeprg=rspec\ \"%:p\" |
+		\else |
+		\	compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
+		\endif
+	autocmd User Bundler if &makeprg !~ 'bundle' | setl makeprg^=bundle\ exec\  | endif
 
 endif " has("autocmd")
 
@@ -180,19 +193,6 @@ noremap <Leader>p :NERDTreeToggle<CR>
 
 " Append a semicolon to the current line
 nnoremap <c-;> mQA;<Esc>`Q
-
-" autoset compilers/makeprgs for test and spec files
-autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
-autocmd FileType ruby
-      \ if expand('%') =~# '_test\.rb$' |
-      \   compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
-      \ elseif expand('%') =~# '_spec\.rb$' |
-      \   compiler rspec | setl makeprg=rspec\ \"%:p\" |
-      \ else |
-      \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
-      \ endif
-autocmd User Bundler
-      \ if &makeprg !~ 'bundle' | setl makeprg^=bundle\ exec\  | endif
 
 " Align on equal signs
 vnoremap <leader>a :Align => = :<CR>
