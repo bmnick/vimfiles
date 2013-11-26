@@ -5,6 +5,7 @@ set nocompatible
 let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:rails_statusline=0
 
 " Pathogen for bundled plugins
 call pathogen#runtime_append_all_bundles()
@@ -171,10 +172,10 @@ endif " has("autocmd")
 " let molokai_original=1
 " colorscheme molokai
 
-" set bg=dark
-" colorscheme solarized
+set bg=dark
+colorscheme solarized
 
-colorscheme detailed
+" colorscheme detailed
 
 " colorscheme wombat256mod
 
