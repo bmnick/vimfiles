@@ -155,3 +155,12 @@
 [submodule "bundle/vim-virtualenv"]
 	path = bundle/vim-virtualenv
 	url = https://github.com/jmcantrell/vim-virtualenv.git
+[submodule "bundle/todo.txt-vim"]
+	path = bundle/todo.txt-vim
+	url = https://github.com/davidoc/todo.txt-vim.git
+[submodule "bundle/vim-handlebars"]
+	path = bundle/vim-handlebars
+	url = git://github.com/nono/vim-handlebars.git
+[submodule "bundle/vim-emmet"]
+	path = bundle/vim-emmet
+	url = https://github.com/mattn/emmet-vim.git
