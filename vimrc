@@ -125,7 +125,7 @@ endfunction
 command! -nargs=1 Bs :call BufSel("<args>")
 
 " CtrlP integration
-noremap <silent> <c-o> :CtrlP<CR>
+noremap <silent> <c-o> :CtrlPBuffer<CR>
 
 " Getting out of insert
 inoremap <silent> jj <Esc>
@@ -201,6 +201,7 @@ vnoremap <leader>a :Align => = :<CR>
 " double tap leader for swap to last file
 nnoremap <leader><leader> <c-^>
 
-" indentation standard
-set expandtab
-set ts=4 sw=4
+" Add project-specific vimrcs
+set exrc
+set secure
+
