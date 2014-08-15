@@ -167,13 +167,15 @@ if has("autocmd")
 
 endif " has("autocmd")
 
+" colorscheme github
+
 " colorscheme pyte
 
 " let molokai_original=1
 " colorscheme molokai
 
-set bg=dark
-colorscheme solarized
+" set bg=dark
+" colorscheme solarized
 
 " colorscheme detailed
 
@@ -181,7 +183,7 @@ colorscheme solarized
 
 " colorscheme vividchalk
 
-" colorscheme railscasts
+colorscheme railscasts
 
 " Rails extras
 command -bar -nargs=1 OpenURL :!open <args>
@@ -205,3 +207,5 @@ nnoremap <leader><leader> <c-^>
 set exrc
 set secure
 
+" Since I use fish and vim doesn't play so well with that, tell it to use bash
+set shell=/bin/bash
