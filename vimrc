@@ -16,36 +16,36 @@ filetype plugin indent on
 
 " Nifty vim command options
 set nrformats="alpha,hex"   " Change letters and hex with ^a and ^x
-set tildeop									" turn tildeop on for tilde as an operator
+set tildeop                 " turn tildeop on for tilde as an operator
 
 " Global line numbering options
-set number					" Enable line numbering
-set numberwidth=6 	" Make line numbering wide like TextMate
+set number          " Enable line numbering
 
 " Toggle between relative numbering and absolute numbering
 function! NumberToggle()
-	if(&relativenumber == 1)
-		set number
-	else
-		set relativenumber
-	endif
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
 endfunction
 nnoremap <leader>r :call NumberToggle()<CR>
 
 let g:syntastic_mode_map = { 'mode': 'active',
-													 \ 'active_filetypes': ['ruby', 'perl'],
-													 \ 'passive_filetypes': ['puppet'] }
+                           \ 'active_filetypes': ['ruby', 'perl'],
+                           \ 'passive_filetypes': ['puppet'] }
 
 " Make sure we're saving for most actions
 set autowrite
 
-" Too much ruby has me loving:
-set tabstop=2
-set shiftwidth=2
-
 " Smarter case handling in searches
 set ignorecase
 set smartcase
+
+" Facebook tabbing style
+set shiftwidth=2
+set tabstop=2
+set expandtab
 
 " Airline config!
 let g:airline_detect_modified=1
@@ -70,8 +70,8 @@ set hlsearch
 noremap <silent> <C-h> :nohls<CR>
 
 if has("gui_macvim")
-	set guifont=Monaco:h14
-	set guioptions-=T
+  set guifont=Monaco:h14
+  set guioptions-=T
 end
 
 set pastetoggle=<leader>v
@@ -94,31 +94,31 @@ nnoremap <silent> <Leader>f :bn<CR>
 set hidden
 
 function! BufSel(pattern)
-	let bufcount = bufnr("$")
-	let currbufnr = 1
-	let nummatches = 0
-	let firstmatchingbufnr = 0
-	while currbufnr <= bufcount
-	if(bufexists(currbufnr))
-		let currbufname = bufname(currbufnr)
-		if(match(currbufname, a:pattern) > -1)
-			echo currbufnr . ": ". bufname(currbufnr)
-			let nummatches += 1
-			let firstmatchingbufnr = currbufnr
-		endif
-	endif
-	let currbufnr = currbufnr + 1
-	endwhile
-	if(nummatches == 1)
-	execute ":buffer ". firstmatchingbufnr
-	elseif(nummatches > 1)
-	let desiredbufnr = input("Enter buffer number: ")
-	if(strlen(desiredbufnr) != 0)
-		execute ":buffer ". desiredbufnr
-	endif
-	else
-	echo "No matching buffers"
-	endif
+  let bufcount = bufnr("$")
+  let currbufnr = 1
+  let nummatches = 0
+  let firstmatchingbufnr = 0
+  while currbufnr <= bufcount
+  if(bufexists(currbufnr))
+    let currbufname = bufname(currbufnr)
+    if(match(currbufname, a:pattern) > -1)
+      echo currbufnr . ": ". bufname(currbufnr)
+      let nummatches += 1
+      let firstmatchingbufnr = currbufnr
+    endif
+  endif
+  let currbufnr = currbufnr + 1
+  endwhile
+  if(nummatches == 1)
+  execute ":buffer ". firstmatchingbufnr
+  elseif(nummatches > 1)
+  let desiredbufnr = input("Enter buffer number: ")
+  if(strlen(desiredbufnr) != 0)
+    execute ":buffer ". desiredbufnr
+  endif
+  else
+  echo "No matching buffers"
+  endif
 endfunction
 
 "Bind the BufSel() function to a user-command
@@ -126,13 +126,14 @@ command! -nargs=1 Bs :call BufSel("<args>")
 
 " CtrlP integration
 noremap <silent> <c-o> :CtrlPBuffer<CR>
+noremap <silent> <c-i> :CtrlP .<CR>
 
-if executable('ag') 
-	" Use ag over grep
-	set grepprg=ag\ --nogroup\ --nocolor
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
 
-	" Use ag in CtrlP for listing files
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " Use ag in CtrlP for listing files
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 endif
 
@@ -152,40 +153,16 @@ noremap <silent> <D-/> \ci
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
-	autocmd WinEnter * setlocal cursorline
-	autocmd WinLeave * setlocal nocursorline
-	autocmd WinLeave * setlocal nohls
-	autocmd FocusGained * setlocal cursorline
-	autocmd FocusLost * setlocal nocursorline
-	autocmd FocusLost * setlocal nohls
+  autocmd WinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+  autocmd WinLeave * setlocal nohls
+  autocmd FocusGained * setlocal cursorline
+  autocmd FocusLost * setlocal nocursorline
+  autocmd FocusLost * setlocal nohls
 
-	autocmd BufNewFile,BufRead *.rb compiler rakespec
-	autocmd BufNewFile,BufRead *.handlebars set filetype=mustache
-
-	autocmd BufNewFile, BufRead *.py set ts=4 sw=4 expandtab
-	"
-" autoset compilers/makeprgs for test and spec files
-	autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
-	autocmd FileType ruby
-		\if expand('%') =~# '_test\.rb$' |
-		\	compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
-		\elseif expand('%') =~# '_spec\.rb$' |
-		\	compiler rspec | setl makeprg=rspec\ \"%:p\" |
-		\else |
-		\	compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
-		\endif
-	autocmd User Bundler if &makeprg !~ 'bundle' | setl makeprg^=bundle\ exec\  | endif
-
-	autocmd Filetype c,cpp,h,m,js,php,hphp autocmd BufWritePre <buffer> :%s/\s\+$//e
+  autocmd Filetype c,cpp,h,m,js,php,hphp autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 endif " has("autocmd")
-
-" colorscheme github
-
-" let molokai_original=1
-" colorscheme molokai
-
-" colorscheme detailed
 
 colorscheme wombat256mod
 
@@ -212,4 +189,36 @@ set secure
 
 " Since I use fish and vim doesn't play so well with that, tell it to use bash
 set shell=/bin/bash
+
+if has("cscope")
+  set csprg=/usr/bin/cscope
+  set csto=0
+  set cst
+  set nocsverb " add any database in current directory, if not keep going upwards in the directory tree until you find a cscope.out file
+
+  if $CSCOPE_DB != ""
+    cs add $CSCOPE_DB
+  else
+    let dir = getcwd()
+    while dir != ""
+      let f = dir . "/cscope.out"
+      if filereadable (f)
+        execute "cs add " . f
+        break
+      endif
+      let dir = substitute (dir, "/[^/]*$", "", "")
+    endwhile
+  endif
+
+  set csverb
+endif
+
+map <C-c><C-c> :exe ":cs find c " . expand("<cword>")
+map <C-c><C-g> :exe ":cs find g " . expand("<cword>")
+map <C-c><C-d> :exe ":cs find d " . expand("<cword>")
+map <C-c><C-e> :exe ":cs find e (^\|[^a-zA-Z_])" . expand("<cword>") . "([^a-zA-Z_]\|$)"
+map <C-c><C-a> :exe ":cs find e function " . expand("<cword>") . "([^a-zA-Z_]\|$)"
+map <C-c><C-b> :exe ":cs find s " . expand("<cword>")
+map <C-c><C-f> :cs find f
+map <C-c><C-t> :exe ":cs find t " . expand("<cword>")
 
