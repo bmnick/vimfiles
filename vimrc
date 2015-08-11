@@ -34,6 +34,8 @@ nnoremap <leader>r :call NumberToggle()<CR>
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['ruby', 'perl'],
                            \ 'passive_filetypes': ['puppet'] }
+" Make sure we get JSX highlighting in mixed mode files
+let g:jsx_ext_required = 0
 
 " Make sure we're saving for most actions
 set autowrite

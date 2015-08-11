@@ -104,3 +104,6 @@
 [submodule "bundle/summerfruit256"]
 	path = bundle/summerfruit256
 	url = git@github.com:vim-scripts/summerfruit256.vim.git
+[submodule "bundle/vim-jsx"]
+	path = bundle/vim-jsx
+	url = https://github.com/mxw/vim-jsx.git

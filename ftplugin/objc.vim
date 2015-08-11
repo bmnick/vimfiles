@@ -1,3 +1,16 @@
+if !exists("*SwitchSourceHeader")
+  function! SwitchSourceHeader()
+    "update!
+    if (expand ("%:e") == "m")
+      find %:t:r.h
+    else
+      find %:t:r.m
+    endif
+  endfunction
+endif
+
+nmap <leader>h :call SwitchSourceHeader()<CR>
+
 " add a definition for Objective-C to tagbar
 let g:tagbar_type_objc = {
     \ 'ctagstype' : 'ObjectiveC',
