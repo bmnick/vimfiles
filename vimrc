@@ -127,6 +127,17 @@ command! -nargs=1 Bs :call BufSel("<args>")
 " CtrlP integration
 noremap <silent> <c-o> :CtrlPBuffer<CR>
 
+if executable('ag') 
+	" Use ag over grep
+	set grepprg=ag\ --nogroup\ --nocolor
+
+	" Use ag in CtrlP for listing files
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+endif
+
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 " Getting out of insert
 inoremap <silent> jj <Esc>
 inoremap <silent> kk <Esc>
@@ -165,28 +176,20 @@ if has("autocmd")
 		\endif
 	autocmd User Bundler if &makeprg !~ 'bundle' | setl makeprg^=bundle\ exec\  | endif
 
+	autocmd Filetype c,cpp,h,m,js,php,hphp autocmd BufWritePre <buffer> :%s/\s\+$//e
+
 endif " has("autocmd")
 
 " colorscheme github
 
-" colorscheme pyte
-
 " let molokai_original=1
 " colorscheme molokai
 
-" set bg=dark
-" colorscheme solarized
-
 " colorscheme detailed
 
-" colorscheme wombat256mod
+colorscheme wombat256mod
 
-" colorscheme vividchalk
-
-colorscheme railscasts
-
-" Rails extras
-command -bar -nargs=1 OpenURL :!open <args>
+nmap <leader>o :TagbarToggle<CR>
 
 " Shorter subsittute
 nnoremap <leader>s :%s//g<left><Left>
@@ -209,3 +212,4 @@ set secure
 
 " Since I use fish and vim doesn't play so well with that, tell it to use bash
 set shell=/bin/bash
+
