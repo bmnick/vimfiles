@@ -31,9 +31,13 @@ function! NumberToggle()
 endfunction
 nnoremap <leader>r :call NumberToggle()<CR>
 
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['ruby', 'perl'],
-                           \ 'passive_filetypes': ['puppet'] }
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
+let g:ycm_extra_conf_vim_data = ['&filetype']
+
 " Make sure we get JSX highlighting in mixed mode files
 let g:jsx_ext_required = 0
 
