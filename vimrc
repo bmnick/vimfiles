@@ -170,6 +170,9 @@ if has("autocmd")
 
 endif " has("autocmd")
 
+" Set up background highlighting
+set colorcolumn=80
+
 colorscheme wombat256mod
 
 nmap <leader>o :TagbarToggle<CR>
@@ -228,3 +231,7 @@ map <C-c><C-b> :exe ":cs find s " . expand("<cword>")
 map <C-c><C-f> :cs find f
 map <C-c><C-t> :exe ":cs find t " . expand("<cword>")
 
+" Import big grep if it's available
+if filereadable("source /home/engshare/admin/scripts/vim/biggrep.vim")
+  source /home/engshare/admin/scripts/vim/biggrep.vim
+endif
