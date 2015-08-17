@@ -110,3 +110,6 @@
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "bundle/vim-flow"]
+	path = bundle/vim-flow
+	url = https://github.com/facebook/vim-flow.git
