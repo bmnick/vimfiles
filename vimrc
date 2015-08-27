@@ -130,6 +130,9 @@ endfunction
 "Bind the BufSel() function to a user-command
 command! -nargs=1 Bs :call BufSel("<args>")
 
+" Quicker matching in ctrlp
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
 " CtrlP integration
 noremap <silent> <c-o> :CtrlPBuffer<CR>
 noremap <silent> <c-i> :CtrlP .<CR>
@@ -196,42 +199,21 @@ nnoremap <leader><leader> <c-^>
 set exrc
 set secure
 
-" Since I use fish and vim doesn't play so well with that, tell it to use bash
-set shell=/bin/bash
-
-if has("cscope")
-  set csprg=/usr/bin/cscope
-  set csto=0
-  set cst
-  set nocsverb " add any database in current directory, if not keep going upwards in the directory tree until you find a cscope.out file
-
-  if $CSCOPE_DB != ""
-    cs add $CSCOPE_DB
-  else
-    let dir = getcwd()
-    while dir != ""
-      let f = dir . "/cscope.out"
-      if filereadable (f)
-        execute "cs add " . f
-        break
-      endif
-      let dir = substitute (dir, "/[^/]*$", "", "")
-    endwhile
-  endif
-
-  set csverb
-endif
-
-map <C-c><C-c> :exe ":cs find c " . expand("<cword>")
-map <C-c><C-g> :exe ":cs find g " . expand("<cword>")
-map <C-c><C-d> :exe ":cs find d " . expand("<cword>")
-map <C-c><C-e> :exe ":cs find e (^\|[^a-zA-Z_])" . expand("<cword>") . "([^a-zA-Z_]\|$)"
-map <C-c><C-a> :exe ":cs find e function " . expand("<cword>") . "([^a-zA-Z_]\|$)"
-map <C-c><C-b> :exe ":cs find s " . expand("<cword>")
-map <C-c><C-f> :cs find f
-map <C-c><C-t> :exe ":cs find t " . expand("<cword>")
-
 " Import big grep if it's available
 if filereadable("source /home/engshare/admin/scripts/vim/biggrep.vim")
   source /home/engshare/admin/scripts/vim/biggrep.vim
 endif
+
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_error_symbol = 'x'
+let g:ycm_warning_symbol = '!'
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+nnoremap <leader>pg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
+
+set iskeyword=@,45,48-57,58,_,192-255,#
+
