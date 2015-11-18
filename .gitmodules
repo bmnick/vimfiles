@@ -122,3 +122,6 @@
 [submodule "bundle/A"]
 	path = bundle/A
 	url = https://github.com/nacitar/a.vim.git
+[submodule "bundle/bundle/AsyncCommand"]
+	path = bundle/bundle/AsyncCommand
+	url = https://github.com/idbrii/AsyncCommand.git
