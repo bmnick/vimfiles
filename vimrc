@@ -37,6 +37,8 @@ nnoremap <leader>r :call NumberToggle()<CR>
 "let g:syntastic_check_on_wq = 0
 
 let g:ycm_extra_conf_vim_data = ['&filetype']
+let g:ycm_server_log_level = 'debug'
+let g:ycm_confirm_extra_conf = 0
 
 " Make sure we get JSX highlighting in mixed mode files
 let g:jsx_ext_required = 0

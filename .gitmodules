@@ -119,3 +119,6 @@
 [submodule "bundle/Align"]
 	path = bundle/Align
 	url = https://github.com/vim-scripts/Align.git
+[submodule "bundle/A"]
+	path = bundle/A
+	url = https://github.com/nacitar/a.vim.git
