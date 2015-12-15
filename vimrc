@@ -91,10 +91,16 @@ inoremap <silent> <c-Tab> <Esc>:tabn<CR>
 inoremap <silent> <c-s-Tab> <Esc>:tabp<CR>
 
 " Make window navigation somewhat quicker
-noremap <silent> <c-j> <c-w>j
-noremap <silent> <c-k> <c-w>k
-noremap <silent> <c-h> <c-w>h
-noremap <silent> <c-l> <c-w>l
+if exists(':tnoremap')
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-j> <C-\><C-n><C-w>j
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-l> <C-\><C-n><C-w>l
+end
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Bounce between buffers more easily
 nnoremap <silent> <Leader>b :bp<CR>
@@ -172,6 +178,9 @@ if has("autocmd")
   autocmd FocusLost * setlocal nohls
 
   autocmd Filetype c,cpp,h,m,js,php,hphp autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+  " Enter insert mode on entering a terminal window
+  autocmd BufWinEnter,WinEnter term://* startinsert
 
 endif " has("autocmd")
 
