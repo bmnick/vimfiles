@@ -6,6 +6,8 @@ nnoremap <D-r> :!buck install --run orca
 nnoremap <D-b> :!buck build orca
 nnoremap <leader>xc :!buck project orca --without-tests && open ~/local/fbsource-fbobjc/fbobjc/Apps/FBMessenger/FBMessenger.xcodeproj
 
+setlocal iskeyword=a-z,A-Z,48-57,_,.,-,>,#
+
 nmap <leader>h :A<CR>
 
 " add a definition for Objective-C to tagbar
