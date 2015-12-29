@@ -7,9 +7,76 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:rails_statusline=0
 
-" Pathogen for bundled plugins
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+call plug#begin('~/.vim/plugged')
+
+""""""""""""""""""""""
+" Navigation Plugins "
+""""""""""""""""""""""
+Plug 'kien/ctrlp.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'nacitar/a.vim'
+Plug 'majutsushi/tagbar'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdtree'
+
+Plug 'bling/vim-airline'
+
+""""""""""""""""""""
+" Language Support "
+""""""""""""""""""""
+Plug 'leshill/vim-json'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-markdown'
+Plug 'vim-scripts/VimClojure'
+" Better support for more english-focused languages
+Plug 'edsono/vim-matchit'
+Plug 'tpope/vim-endwise'
+" Show colors in that color where possible
+Plug 'skammer/vim-css-color'
+
+"""""""""""""""""""
+" Editing Helpers "
+"""""""""""""""""""
+Plug 'Raimondi/delimitMate'
+Plug 'ervandew/supertab'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/Align'
+Plug 'vim-scripts/The-NERD-Commenter'
+
+""""""""""""""""""""
+" Building Helpers "
+""""""""""""""""""""
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'facebook/vim-flow', { 'for': 'javascript' }
+Plug 'reinh/vim-makegreen'
+
+"""""""""""""""""""
+" VCS Integration "
+"""""""""""""""""""
+Plug 'tpope/vim-fugitive'
+
+"""""""""""""
+" Libraries "
+"""""""""""""
+Plug 'slack/vim-l9'
+Plug 'duff/vim-scratch'
+
+""""""""""""""""
+" Color Themes "
+""""""""""""""""
+Plug 'jpo/vim-railscasts-theme'
+Plug 'bmnick/vim-ir_black'
+Plug 'rking/vim-detailed'
+Plug 'vim-scripts/molokai'
+Plug 'vim-scripts/wombat256.vim'
+
+call plug#end()
 
 syntax on
 filetype plugin indent on
@@ -30,15 +97,6 @@ function! NumberToggle()
   endif
 endfunction
 nnoremap <leader>r :call NumberToggle()<CR>
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-
-let g:ycm_extra_conf_vim_data = ['&filetype']
-let g:ycm_server_log_level = 'debug'
-let g:ycm_confirm_extra_conf = 0
 
 " Make sure we get JSX highlighting in mixed mode files
 let g:jsx_ext_required = 0
@@ -216,6 +274,9 @@ if filereadable("source /home/engshare/admin/scripts/vim/biggrep.vim")
 endif
 
 " YouCompleteMe
+let g:ycm_extra_conf_vim_data = ['&filetype']
+let g:ycm_server_log_level = 'debug'
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_error_symbol = 'x'
@@ -225,6 +286,4 @@ let g:ycm_server_log_level = 'debug'
 nnoremap <leader>pg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
-
-set iskeyword=@,45,48-57,58,_,192-255,#
 
