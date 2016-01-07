@@ -78,8 +78,18 @@ Plug 'vim-scripts/wombat256.vim'
 
 call plug#end()
 
+" Import big grep if it's available
+if filereadable("source /home/engshare/admin/scripts/vim/biggrep.vim")
+  source /home/engshare/admin/scripts/vim/biggrep.vim
+endif
+
 syntax on
 filetype plugin indent on
+
+colorscheme wombat256mod
+
+" Make sure we're saving for most actions
+set autowrite
 
 " Nifty vim command options
 set nrformats="alpha,hex"   " Change letters and hex with ^a and ^x
@@ -87,22 +97,7 @@ set tildeop                 " turn tildeop on for tilde as an operator
 
 " Global line numbering options
 set number          " Enable line numbering
-
-" Toggle between relative numbering and absolute numbering
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunction
-nnoremap <leader>r :call NumberToggle()<CR>
-
-" Make sure we get JSX highlighting in mixed mode files
-let g:jsx_ext_required = 0
-
-" Make sure we're saving for most actions
-set autowrite
+set hidden
 
 " Smarter case handling in searches
 set ignorecase
@@ -112,9 +107,6 @@ set smartcase
 set shiftwidth=2
 set tabstop=2
 set expandtab
-
-" Airline config!
-let g:airline_detect_modified=1
 
 " Activate the statusline globally
 set laststatus=2
@@ -131,39 +123,64 @@ set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
 set statusline+=::\ %b,0x%-8B\ ::\                   " current char
 set statusline+=%-14.(%l,%c%V%)\ ::\ %<%P        " offset
 
+" Set search preferences
 set incsearch
 set hlsearch
-noremap <silent> <C-h> :nohls<CR>
+
+" Show some non-printing characters
+set listchars=eol:¶,tab:>-,trail:∙,extends:>,precedes:<
+
+" Set up background highlighting
+set colorcolumn=80
+
+" Add project-specific vimrcs
+set exrc
+set secure
+
+set pastetoggle=<leader>v
+
+" Make sure we get JSX highlighting in mixed mode files
+let g:jsx_ext_required = 0
+
+" Quicker matching in ctrlp
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
+" Airline config!
+let g:airline_detect_modified=1
+
+" YouCompleteMe
+let g:ycm_extra_conf_vim_data = ['&filetype']
+let g:ycm_server_log_level = 'debug'
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_error_symbol = 'x'
+let g:ycm_warning_symbol = '!'
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+endif
 
 if has("gui_macvim")
   set guifont=Monaco:h14
   set guioptions-=T
 end
 
-set pastetoggle=<leader>v
-
-" Do some stuff to make tabs a little nicer
-noremap <silent> <c-Tab> :tabn<CR>
-noremap <silent> <c-s-Tab> :tabp<CR>
-inoremap <silent> <c-Tab> <Esc>:tabn<CR>
-inoremap <silent> <c-s-Tab> <Esc>:tabp<CR>
-
-" Make window navigation somewhat quicker
-if exists(':tnoremap')
-  tnoremap <C-h> <C-\><C-n><C-w>h
-  tnoremap <C-j> <C-\><C-n><C-w>j
-  tnoremap <C-k> <C-\><C-n><C-w>k
-  tnoremap <C-l> <C-\><C-n><C-w>l
-end
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Bounce between buffers more easily
-nnoremap <silent> <Leader>b :bp<CR>
-nnoremap <silent> <Leader>f :bn<CR>
-set hidden
+" Toggle between relative numbering and absolute numbering
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunction
 
 function! BufSel(pattern)
   let bufcount = bufnr("$")
@@ -193,37 +210,10 @@ function! BufSel(pattern)
   endif
 endfunction
 
-"Bind the BufSel() function to a user-command
-command! -nargs=1 Bs :call BufSel("<args>")
-
-" Quicker matching in ctrlp
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-
-" CtrlP integration
-noremap <silent> <c-o> :CtrlPBuffer<CR>
-noremap <silent> <c-i> :CtrlP .<CR>
-
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-endif
-
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" Getting out of insert
-inoremap <silent> jj <Esc>
-inoremap <silent> kk <Esc>
-
-" Show some non-printing characters
-set listchars=eol:¶,tab:>-,trail:∙,extends:>,precedes:<
-noremap <silent> <leader>l :set invlist<CR>
-
-" NERDCommenter usefulness
-noremap <silent> <D-/> \ci
+function SetupTerm()
+  resize 15
+  set winfixheight
+endfunction
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -239,13 +229,56 @@ if has("autocmd")
 
   " Enter insert mode on entering a terminal window
   autocmd BufWinEnter,WinEnter term://* startinsert
+  autocmd TermOpen * call SetupTerm()
 
 endif " has("autocmd")
 
-" Set up background highlighting
-set colorcolumn=80
+"Bind the BufSel() function to a user-command
+command! -nargs=1 Bs :call BufSel("<args>")
 
-colorscheme wombat256mod
+" Start following spacemacs basic style
+let mapleader = "\<Space>"
+
+nnoremap <leader>r :call NumberToggle()<CR>
+
+" Do some stuff to make tabs a little nicer
+noremap <silent> <c-Tab> :tabn<CR>
+noremap <silent> <c-s-Tab> :tabp<CR>
+inoremap <silent> <c-Tab> <Esc>:tabn<CR>
+inoremap <silent> <c-s-Tab> <Esc>:tabp<CR>
+
+noremap <silent> <C-h> :nohls<CR>
+
+" Make window navigation somewhat quicker
+if exists(':tnoremap')
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-j> <C-\><C-n><C-w>j
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-l> <C-\><C-n><C-w>l
+end
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Bounce between buffers more easily
+nnoremap <silent> <Leader>b :bp<CR>
+nnoremap <silent> <Leader>f :bn<CR>
+
+" CtrlP integration
+noremap <silent> <c-o> :CtrlPBuffer<CR>
+noremap <silent> <c-i> :CtrlP .<CR>
+
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" Getting out of insert
+inoremap <silent> jj <Esc>
+inoremap <silent> kk <Esc>
+
+noremap <silent> <leader>l :set invlist<CR>
+
+" NERDCommenter usefulness
+noremap <silent> <D-/> \ci
 
 nmap <leader>o :TagbarToggle<CR>
 
@@ -264,26 +297,6 @@ vnoremap <leader>a :Align => = :<CR>
 " double tap leader for swap to last file
 nnoremap <leader><leader> <c-^>
 
-" Add project-specific vimrcs
-set exrc
-set secure
-
-" Import big grep if it's available
-if filereadable("source /home/engshare/admin/scripts/vim/biggrep.vim")
-  source /home/engshare/admin/scripts/vim/biggrep.vim
-endif
-
-" YouCompleteMe
-let g:ycm_extra_conf_vim_data = ['&filetype']
-let g:ycm_server_log_level = 'debug'
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_error_symbol = 'x'
-let g:ycm_warning_symbol = '!'
-let g:ycm_server_keep_logfiles = 1
-let g:ycm_server_log_level = 'debug'
 nnoremap <leader>pg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
-
