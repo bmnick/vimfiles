@@ -9,6 +9,7 @@ let g:rails_statusline=0
 
 call plug#begin('~/.vim/plugged')
 
+
 """"""""""""""""""""""
 " Navigation Plugins "
 """"""""""""""""""""""
